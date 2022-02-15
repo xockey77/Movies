@@ -1,13 +1,7 @@
-//
-//  Genre.swift
-//  CollectionsView
-//
-//  Created by Andrey Belov on 14.02.2022.
-//
 
 import Foundation
 
-struct Genre: Decodable, Identifiable {
+struct Genre: Decodable, Identifiable, Equatable {
     let id: Int
     let name: String
 

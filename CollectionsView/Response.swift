@@ -1,9 +1,3 @@
-//
-//  Response.swift
-//  CollectionsView
-//
-//  Created by Andrey Belov on 14.02.2022.
-//
 
 import Foundation
 
