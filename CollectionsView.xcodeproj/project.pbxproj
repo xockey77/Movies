@@ -23,6 +23,7 @@
 		ABFE23BF27BBE7BC001F46A2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFE23BE27BBE7BC001F46A2 /* DetailViewController.swift */; };
 		ABFE23C127BCD0E6001F46A2 /* APIshared.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFE23C027BCD0E6001F46A2 /* APIshared.swift */; };
 		ABFE23C327BCD876001F46A2 /* MovieCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFE23C227BCD876001F46A2 /* MovieCollection.swift */; };
+		ABFE23C527BD0080001F46A2 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFE23C427BD0080001F46A2 /* Credits.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		ABFE23BE27BBE7BC001F46A2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		ABFE23C027BCD0E6001F46A2 /* APIshared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIshared.swift; sourceTree = "<group>"; };
 		ABFE23C227BCD876001F46A2 /* MovieCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollection.swift; sourceTree = "<group>"; };
+		ABFE23C427BD0080001F46A2 /* Credits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				ABFE23AA27BA4108001F46A2 /* Movie.swift */,
 				ABFE23B027BA4606001F46A2 /* Response.swift */,
 				ABFE23AC27BA412E001F46A2 /* Genre.swift */,
+				ABFE23C427BD0080001F46A2 /* Credits.swift */,
 				ABF9D26A27B51BAA009EC92C /* Assets.xcassets */,
 				ABF9D26C27B51BAA009EC92C /* LaunchScreen.storyboard */,
 				ABF9D26F27B51BAA009EC92C /* Info.plist */,
@@ -170,6 +173,7 @@
 			files = (
 				ABFE23BF27BBE7BC001F46A2 /* DetailViewController.swift in Sources */,
 				ABFE23B927BB8D1F001F46A2 /* TitleViewCell.swift in Sources */,
+				ABFE23C527BD0080001F46A2 /* Credits.swift in Sources */,
 				ABFE23AB27BA4108001F46A2 /* Movie.swift in Sources */,
 				ABFE23B127BA4606001F46A2 /* Response.swift in Sources */,
 				ABFE23C327BCD876001F46A2 /* MovieCollection.swift in Sources */,

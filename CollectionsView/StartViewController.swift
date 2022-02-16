@@ -120,7 +120,7 @@ extension StartViewController {
             "api_key":  API.shared.API_KEY,
             "language": "ru"
         ].map { URLQueryItem(name: $0.key, value: $0.value)}
-        let dataTask = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
+        let dataTask = URLSession.shared.dataTask(with: urlComponents.url!) { [self] data, response, error in
             if let error = error as NSError?, error.code == -999 {
                 return
             } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
@@ -129,15 +129,15 @@ extension StartViewController {
                     let result = try! decoder.decode(APIResponseList<Movie>.self, from: data)
                     let movieSet = result.results
                     let collection = MovieCollection(title: collectionTitle, movies: movieSet)
-                    self.collections.append(collection)
+                    collections.append(collection)
                     DispatchQueue.main.async {
-                        self.applySnapshot(animatingDifferences: false)
+                        applySnapshot(animatingDifferences: false)
                     }
                     return
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.showNetworkError()
+                    showNetworkError()
                 }
             }
         }

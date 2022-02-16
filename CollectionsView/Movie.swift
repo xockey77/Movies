@@ -2,6 +2,7 @@
 import Foundation
 
 struct Movie: Hashable, Decodable {
+    
     let id: Int
     let title: String
     let overview: String?

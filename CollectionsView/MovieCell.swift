@@ -3,7 +3,6 @@ import UIKit
 
 class MovieCell: UICollectionViewCell {
     var downLoadTask: URLSessionDownloadTask?
-    static let reuseIdentifier = "movie-cell-reuse-identifier"
     let imageView = UIImageView()
     let titleLabel = UILabel()
     let yearLabel = UILabel()
@@ -17,6 +16,11 @@ class MovieCell: UICollectionViewCell {
     }
     deinit {
         downLoadTask?.cancel()
+    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        downLoadTask?.cancel()
+        downLoadTask = nil
     }
 }
 
@@ -47,14 +51,13 @@ extension MovieCell {
         imageView.layer.cornerRadius = 8
         imageView.clipsToBounds = true
         
-        let spacing = CGFloat(10)
         NSLayoutConstraint.activate([
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: CGFloat(-40)),
 
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: spacing),
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: CGFloat(10)),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
 
