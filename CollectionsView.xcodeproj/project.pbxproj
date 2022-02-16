@@ -21,6 +21,8 @@
 		ABFE23BB27BBBFA7001F46A2 /* UIImageView+loadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFE23BA27BBBFA7001F46A2 /* UIImageView+loadImage.swift */; };
 		ABFE23BD27BBBFEB001F46A2 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFE23BC27BBBFEB001F46A2 /* ImageCache.swift */; };
 		ABFE23BF27BBE7BC001F46A2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFE23BE27BBE7BC001F46A2 /* DetailViewController.swift */; };
+		ABFE23C127BCD0E6001F46A2 /* APIshared.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFE23C027BCD0E6001F46A2 /* APIshared.swift */; };
+		ABFE23C327BCD876001F46A2 /* MovieCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFE23C227BCD876001F46A2 /* MovieCollection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		ABFE23BA27BBBFA7001F46A2 /* UIImageView+loadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+loadImage.swift"; sourceTree = "<group>"; };
 		ABFE23BC27BBBFEB001F46A2 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		ABFE23BE27BBE7BC001F46A2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		ABFE23C027BCD0E6001F46A2 /* APIshared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIshared.swift; sourceTree = "<group>"; };
+		ABFE23C227BCD876001F46A2 /* MovieCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,8 @@
 				ABF9D26327B51BA8009EC92C /* SceneDelegate.swift */,
 				ABF9D26727B51BA8009EC92C /* Main.storyboard */,
 				ABFE23B227BB8BE9001F46A2 /* StartViewController.swift */,
+				ABFE23C227BCD876001F46A2 /* MovieCollection.swift */,
+				ABFE23C027BCD0E6001F46A2 /* APIshared.swift */,
 				ABFE23BC27BBBFEB001F46A2 /* ImageCache.swift */,
 				ABFE23BA27BBBFA7001F46A2 /* UIImageView+loadImage.swift */,
 				ABFE23B827BB8D1F001F46A2 /* TitleViewCell.swift */,
@@ -166,9 +172,11 @@
 				ABFE23B927BB8D1F001F46A2 /* TitleViewCell.swift in Sources */,
 				ABFE23AB27BA4108001F46A2 /* Movie.swift in Sources */,
 				ABFE23B127BA4606001F46A2 /* Response.swift in Sources */,
+				ABFE23C327BCD876001F46A2 /* MovieCollection.swift in Sources */,
 				ABFE23B327BB8BE9001F46A2 /* StartViewController.swift in Sources */,
 				ABFE23BD27BBBFEB001F46A2 /* ImageCache.swift in Sources */,
 				ABFE23B727BB8CD9001F46A2 /* MovieCell.swift in Sources */,
+				ABFE23C127BCD0E6001F46A2 /* APIshared.swift in Sources */,
 				ABFE23BB27BBBFA7001F46A2 /* UIImageView+loadImage.swift in Sources */,
 				ABF9D26227B51BA8009EC92C /* AppDelegate.swift in Sources */,
 				ABF9D26427B51BA8009EC92C /* SceneDelegate.swift in Sources */,

@@ -21,6 +21,10 @@ struct Movie: Hashable, Decodable {
         hasher.combine(identifier)
     }
     
+    static func == (lhs: Movie, rhs: Movie) -> Bool {
+      lhs.identifier == rhs.identifier
+    }
+    
     var posterUrl: URL? {
         guard let posterPath = posterPath else { return nil }
         let url = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)")

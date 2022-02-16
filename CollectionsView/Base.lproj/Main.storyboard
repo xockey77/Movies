@@ -42,22 +42,54 @@
                                     <constraint firstAttribute="width" constant="240" id="tNJ-qL-Nyv"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Wn-iK-zbI">
+                                <rect key="frame" x="20" y="488" width="374" height="324"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kjR-6b-iBh">
+                                        <rect key="frame" x="8" y="33" width="358" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lKj-Sz-8zr">
+                                        <rect key="frame" x="8" y="8" width="358" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="kjR-6b-iBh" secondAttribute="trailing" constant="8" id="3NH-7b-jXr"/>
+                                    <constraint firstAttribute="trailing" secondItem="lKj-Sz-8zr" secondAttribute="trailing" constant="8" id="9Rf-73-KPv"/>
+                                    <constraint firstItem="kjR-6b-iBh" firstAttribute="top" secondItem="lKj-Sz-8zr" secondAttribute="bottom" constant="8" id="Ixl-hX-NDg"/>
+                                    <constraint firstItem="lKj-Sz-8zr" firstAttribute="leading" secondItem="1Wn-iK-zbI" secondAttribute="leading" constant="8" id="V9i-xP-KTO"/>
+                                    <constraint firstItem="lKj-Sz-8zr" firstAttribute="top" secondItem="1Wn-iK-zbI" secondAttribute="top" constant="8" id="i8b-hq-bsS"/>
+                                    <constraint firstItem="kjR-6b-iBh" firstAttribute="leading" secondItem="1Wn-iK-zbI" secondAttribute="leading" constant="8" id="xKW-Tj-PV3"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9UU-N5-6Qy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="9UU-N5-6Qy" firstAttribute="bottom" secondItem="1Wn-iK-zbI" secondAttribute="bottom" constant="50" id="6pQ-hY-KP0"/>
+                            <constraint firstItem="1Wn-iK-zbI" firstAttribute="leading" secondItem="9UU-N5-6Qy" secondAttribute="leading" constant="20" id="AFT-j6-clP"/>
                             <constraint firstItem="N74-CX-8Wi" firstAttribute="top" secondItem="9UU-N5-6Qy" secondAttribute="top" id="HTv-3t-dGt"/>
+                            <constraint firstItem="1Wn-iK-zbI" firstAttribute="top" secondItem="N74-CX-8Wi" secondAttribute="bottom" constant="40" id="dG5-LS-o59"/>
+                            <constraint firstItem="9UU-N5-6Qy" firstAttribute="trailing" secondItem="1Wn-iK-zbI" secondAttribute="trailing" constant="20" id="fZJ-wU-fyJ"/>
                             <constraint firstItem="N74-CX-8Wi" firstAttribute="centerX" secondItem="9UU-N5-6Qy" secondAttribute="centerX" id="g0X-x5-HjU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="5Tb-7b-58i"/>
                     <connections>
+                        <outlet property="descriptionLabel" destination="kjR-6b-iBh" id="Rft-gY-idt"/>
                         <outlet property="posterView" destination="N74-CX-8Wi" id="UfY-jd-CZd"/>
+                        <outlet property="yearLabel" destination="lKj-Sz-8zr" id="sIw-Av-g6A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cYj-JU-X4B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1206" y="642"/>
+            <point key="canvasLocation" x="1205.7971014492755" y="641.51785714285711"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6hP-d2-6In">

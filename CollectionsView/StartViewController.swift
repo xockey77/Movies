@@ -3,66 +3,32 @@ import UIKit
 
 class StartViewController: UIViewController {
     
-    private let API_KEY = "91ada702dc3365bdbb0bb056b9fa5c03"
-    private let endpoint1 = "https://api.themoviedb.org/3/movie/top_rated"
-    private let endpoint2 = "https://api.themoviedb.org/3/movie/popular"
-    private let endpoint3 = "https://api.themoviedb.org/3/movie/upcoming"
-    
-    var videoSet: [Movie] = []
-
-    struct VideoCollection: Hashable {
-        var title: String = ""
-        var videos: [Movie] = []
-
-        let identifier = UUID()
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(identifier)
-        }
-    }
-    
-    var collections: [VideoCollection] = [VideoCollection(title: "Popular", videos: []),
-                                          VideoCollection(title: "Top Rated", videos: []),
-                                          VideoCollection(title: "Upcoming", videos: [])]
-    
+    var collections: [MovieCollection] = []
     var collectionView: UICollectionView! = nil
-    var dataSource: UICollectionViewDiffableDataSource<VideoCollection, Movie>! = nil
-    var currentSnapshot: NSDiffableDataSourceSnapshot<VideoCollection, Movie>! = nil
+    var dataSource: UICollectionViewDiffableDataSource<MovieCollection, Movie>! = nil
+    var currentSnapshot: NSDiffableDataSourceSnapshot<MovieCollection, Movie>! = nil
     static let titleElementKind = "title-element-kind"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Netflix"
-        fetchMovies(from: endpoint2)
-        while videoSet.isEmpty {
-            
-        }
-        collections[0].videos = videoSet
-        videoSet = []
-        fetchMovies(from: endpoint1)
-        while videoSet.isEmpty {
-            
-        }
-        collections[1].videos = videoSet
-        videoSet = []
-        fetchMovies(from: endpoint3)
-        while videoSet.isEmpty {
-            
-        }
-        collections[2].videos = videoSet
+        fetchMovies(collectionTitle: "Popular", from: API.shared.endpoint + "popular")
+        fetchMovies(collectionTitle: "Top Rated", from: API.shared.endpoint + "top_rated")
+        fetchMovies(collectionTitle: "Upcoming", from: API.shared.endpoint + "upcoming")
         configureHierarchy()
         configureDataSource()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "ShowMovieDetail" {
-                let movieDetailViewController = segue.destination as! MovieDetailViewController
-                let indexPath = sender as! IndexPath
-                let title = collections[indexPath.section].videos[indexPath.row].title
-                movieDetailViewController.title = title
-                movieDetailViewController.movie = collections[indexPath.section].videos[indexPath.row]
+        if segue.identifier == "ShowMovieDetail" {
+            let movieDetailViewController = segue.destination as! MovieDetailViewController
+            let indexPath = sender as! IndexPath
+            let title = collections[indexPath.section].movies[indexPath.row].title
+            movieDetailViewController.title = title
+            movieDetailViewController.movie = collections[indexPath.section].movies[indexPath.row]
                 
-            }
         }
+    }
 }
 
 extension StartViewController {
@@ -112,24 +78,16 @@ extension StartViewController {
     }
     func configureDataSource() {
         
-        let cellRegistration = UICollectionView.CellRegistration
-        <MovieCell, Movie> { (cell, indexPath, video) in
-            cell.titleLabel.text = video.title
-            cell.yearLabel.text = video.releaseYearToString
-            if let imageURL = URL(string: "\(video.posterUrl!)") {
-                _ = cell.imageView.loadImage(imageUrl: imageURL)
-            }
+        let cellRegistration = UICollectionView.CellRegistration<MovieCell, Movie> { (cell, indexPath, movie) in
+            cell.updateCell(with: movie)
         }
         
-        dataSource = UICollectionViewDiffableDataSource
-        <VideoCollection, Movie>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, video: Movie) -> UICollectionViewCell? in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: video)
+        dataSource = UICollectionViewDiffableDataSource<MovieCollection, Movie>(collectionView: collectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, movie: Movie) -> UICollectionViewCell? in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: movie)
         }
         
-        let supplementaryRegistration = UICollectionView.SupplementaryRegistration
-        <TitleSupplementaryView>(elementKind: StartViewController.titleElementKind) {
-            (supplementaryView, string, indexPath) in
+        let supplementaryRegistration = UICollectionView.SupplementaryRegistration<TitleSupplementaryView>(elementKind: StartViewController.titleElementKind) { (supplementaryView, string, indexPath) in
             if let snapshot = self.currentSnapshot {
                 let videoCategory = snapshot.sectionIdentifiers[indexPath.section]
                 supplementaryView.label.text = videoCategory.title
@@ -137,28 +95,30 @@ extension StartViewController {
         }
         
         dataSource.supplementaryViewProvider = { (view, kind, index) in
-            return self.collectionView.dequeueConfiguredReusableSupplementary(
-                using: supplementaryRegistration, for: index)
+            return self.collectionView.dequeueConfiguredReusableSupplementary(using: supplementaryRegistration, for: index)
         }
         
-        currentSnapshot = NSDiffableDataSourceSnapshot
-            <VideoCollection, Movie>()
+        applySnapshot(animatingDifferences: false)
+    }
+    
+    func applySnapshot(animatingDifferences: Bool = true) {
+        currentSnapshot = NSDiffableDataSourceSnapshot<MovieCollection, Movie>()
         collections.forEach {
             let collection = $0
             currentSnapshot.appendSections([collection])
-            currentSnapshot.appendItems(collection.videos)
+            currentSnapshot.appendItems(collection.movies)
         }
-        dataSource.apply(currentSnapshot, animatingDifferences: false)
+        dataSource.apply(currentSnapshot, animatingDifferences: animatingDifferences)
     }
 }
 
 extension StartViewController {
     
-    func fetchMovies(from endpoint: String) {
+    func fetchMovies(collectionTitle: String, from endpoint: String) {
         var urlComponents = URLComponents(string: endpoint)!
         urlComponents.queryItems = [
-            "api_key":  API_KEY
-            //"language": "ru"
+            "api_key":  API.shared.API_KEY,
+            "language": "ru"
         ].map { URLQueryItem(name: $0.key, value: $0.value)}
         let dataTask = URLSession.shared.dataTask(with: urlComponents.url!) { data, response, error in
             if let error = error as NSError?, error.code == -999 {
@@ -167,9 +127,11 @@ extension StartViewController {
                 if let data = data {
                     let decoder = JSONDecoder()
                     let result = try! decoder.decode(APIResponseList<Movie>.self, from: data)
-                    self.videoSet = result.results
+                    let movieSet = result.results
+                    let collection = MovieCollection(title: collectionTitle, movies: movieSet)
+                    self.collections.append(collection)
                     DispatchQueue.main.async {
-                        //self.collectionView.reloadData()
+                        self.applySnapshot(animatingDifferences: false)
                     }
                     return
                 }
@@ -196,7 +158,7 @@ extension StartViewController {
 
 extension StartViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+      guard dataSource.itemIdentifier(for: indexPath) != nil else { return }
       performSegue(withIdentifier: "ShowMovieDetail", sender: indexPath)
   }
 }

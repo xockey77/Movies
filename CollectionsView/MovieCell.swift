@@ -2,7 +2,7 @@
 import UIKit
 
 class MovieCell: UICollectionViewCell {
-
+    var downLoadTask: URLSessionDownloadTask?
     static let reuseIdentifier = "movie-cell-reuse-identifier"
     let imageView = UIImageView()
     let titleLabel = UILabel()
@@ -15,9 +15,21 @@ class MovieCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError()
     }
+    deinit {
+        downLoadTask?.cancel()
+    }
 }
 
 extension MovieCell {
+    
+    func updateCell(with movie: Movie) {
+        titleLabel.text = movie.title
+        yearLabel.text = movie.releaseYearToString
+        if let imageURL = URL(string: "\(movie.posterUrl!)") {
+            downLoadTask  = imageView.loadImage(imageUrl: imageURL)
+        }
+    }
+    
     func configure() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false

@@ -12,28 +12,28 @@ class MovieDetailViewController: UIViewController {
     var movie: Movie!
     var downLoadTask: URLSessionDownloadTask?
     @IBOutlet weak var posterView: UIImageView!
-    
-    let x: Int = {
-       return 10
-    }()
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var yearLabel: UILabel!
     
     override func viewDidLoad() {
-            super.viewDidLoad()
-            if movie != nil {
-                updateUI()
-            }
+        super.viewDidLoad()
+        //view.backgroundColor = .clear
+        if movie != nil {
+            updateUI()
         }
+    }
         
-        func updateUI() {
-            if let posterUrl = URL(string: "\(movie.posterUrl!)") {
-                downLoadTask = posterView.loadImage(imageUrl: posterUrl)
-            }
-            posterView.layer.cornerRadius = 8
-            posterView.clipsToBounds = true
+    func updateUI() {
+        if let posterUrl = URL(string: "\(movie.posterUrl!)") {
+            downLoadTask = posterView.loadImage(imageUrl: posterUrl)
         }
+        posterView.layer.cornerRadius = 8
+        posterView.clipsToBounds = true
+        descriptionLabel.text = movie.overview ?? ""
+        yearLabel.text = "\(movie.releaseYearToString), ★\(movie.voteAverage)"
+    }
         
-        deinit {
-            downLoadTask?.cancel()
-        }
-
+    deinit {
+        downLoadTask?.cancel()
+    }
 }
