@@ -15,7 +15,7 @@ struct Movie: Hashable, Decodable {
     let genres: [Genre]?
     let posterPath: String?
     let backdropPath: String?
-    let releaseDate: String?
+    let releaseDate: String
     
     let identifier = UUID()
     func hash(into hasher: inout Hasher) {
@@ -39,7 +39,16 @@ struct Movie: Hashable, Decodable {
     }
     
     var releaseYearToString: String {
-        return releaseDate?.split(separator: "-").map(String.init).first ?? ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-mm-dd"
+        let date = dateFormatter.date(from: releaseDate)
+        dateFormatter.dateFormat = "yyyy"
+        if let date = date {
+            return dateFormatter.string(from: date)
+        } else {
+            return ""
+        }
+        //return releaseDate?.split(separator: "-").map(String.init).first ?? ""
     }
     
     enum CodingKeys: String, CodingKey {

@@ -89,8 +89,8 @@ extension StartViewController {
         
         let supplementaryRegistration = UICollectionView.SupplementaryRegistration<TitleSupplementaryView>(elementKind: StartViewController.titleElementKind) { (supplementaryView, string, indexPath) in
             if let snapshot = self.currentSnapshot {
-                let videoCategory = snapshot.sectionIdentifiers[indexPath.section]
-                supplementaryView.label.text = videoCategory.title
+                let movieCategory = snapshot.sectionIdentifiers[indexPath.section]
+                supplementaryView.label.text = movieCategory.title
             }
         }
         
@@ -103,8 +103,8 @@ extension StartViewController {
     
     func applySnapshot(animatingDifferences: Bool = true) {
         currentSnapshot = NSDiffableDataSourceSnapshot<MovieCollection, Movie>()
-        collections.forEach {
-            let collection = $0
+        collections.forEach { collection in
+            //let collection = $0
             currentSnapshot.appendSections([collection])
             currentSnapshot.appendItems(collection.movies)
         }

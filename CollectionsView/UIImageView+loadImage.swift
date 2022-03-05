@@ -25,4 +25,26 @@ extension UIImageView {
         downloadTask.resume()
         return downloadTask
     }
+    
+    func loadImage(imageUrl: URL,
+                   completion: @escaping (UIImage?) -> Void) {
+        if let image = Cache.imageCache[imageUrl] {
+            completion(image)
+        }
+        let session = URLSession.shared
+        let downloadTask = session.downloadTask(with: imageUrl) {
+            [weak self] url, _, error in
+            if error == nil, let url = url,
+               let data = try? Data(contentsOf: url),
+               let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    if let weakSelf = self {
+                        weakSelf.image = image
+                        Cache.imageCache[imageUrl] = image
+                    }
+                }
+            }
+        }
+        downloadTask.resume()
+    }
 }
