@@ -1,8 +1,12 @@
 
 import UIKit
 
-class StartViewController: UIViewController {
-    
+protocol MoviesViewControllerDelegate: AnyObject {
+    func moviesViewControllerDidSelectMovie(_ selectedMovie: Movie)
+}
+
+class MoviesViewController: UIViewController {
+    weak var delegate: MoviesViewControllerDelegate?
     var collections: [MovieCollection] = []
     var collectionView: UICollectionView! = nil
     var dataSource: UICollectionViewDiffableDataSource<MovieCollection, Movie>! = nil
@@ -11,27 +15,15 @@ class StartViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Netflix"
         fetchMovies(collectionTitle: "Popular", from: API.shared.endpoint + "popular")
         fetchMovies(collectionTitle: "Top Rated", from: API.shared.endpoint + "top_rated")
         fetchMovies(collectionTitle: "Upcoming", from: API.shared.endpoint + "upcoming")
         configureHierarchy()
         configureDataSource()
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowMovieDetail" {
-            let movieDetailViewController = segue.destination as! MovieDetailViewController
-            let indexPath = sender as! IndexPath
-            let title = collections[indexPath.section].movies[indexPath.row].title
-            movieDetailViewController.title = title
-            movieDetailViewController.movie = collections[indexPath.section].movies[indexPath.row]
-                
-        }
-    }
 }
 
-extension StartViewController {
+extension MoviesViewController {
     func createLayout() -> UICollectionViewLayout {
         let sectionProvider = { (sectionIndex: Int,
             layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -47,7 +39,7 @@ extension StartViewController {
             let titleSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
             let titleSupplementary = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: titleSize,
-                elementKind: StartViewController.titleElementKind,
+                elementKind: MoviesViewController.titleElementKind,
                 alignment: .top)
             section.boundarySupplementaryItems = [titleSupplementary]
             return section
@@ -62,7 +54,7 @@ extension StartViewController {
     }
 }
 
-extension StartViewController {
+extension MoviesViewController {
     func configureHierarchy() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -87,7 +79,7 @@ extension StartViewController {
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: movie)
         }
         
-        let supplementaryRegistration = UICollectionView.SupplementaryRegistration<TitleSupplementaryView>(elementKind: StartViewController.titleElementKind) { (supplementaryView, string, indexPath) in
+        let supplementaryRegistration = UICollectionView.SupplementaryRegistration<TitleSupplementaryView>(elementKind: MoviesViewController.titleElementKind) { (supplementaryView, string, indexPath) in
             if let snapshot = self.currentSnapshot {
                 let movieCategory = snapshot.sectionIdentifiers[indexPath.section]
                 supplementaryView.label.text = movieCategory.title
@@ -112,7 +104,7 @@ extension StartViewController {
     }
 }
 
-extension StartViewController {
+extension MoviesViewController {
     
     func fetchMovies(collectionTitle: String, from endpoint: String) {
         var urlComponents = URLComponents(string: endpoint)!
@@ -155,10 +147,10 @@ extension StartViewController {
     
 }
 
-
-extension StartViewController: UICollectionViewDelegate {
+extension MoviesViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
       guard dataSource.itemIdentifier(for: indexPath) != nil else { return }
-      performSegue(withIdentifier: "ShowMovieDetail", sender: indexPath)
+      let movie = collections[indexPath.section].movies[indexPath.row]
+      delegate?.moviesViewControllerDidSelectMovie(movie)
   }
 }

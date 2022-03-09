@@ -9,7 +9,7 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
     
-    var movie: Movie!
+    var movie: Movie?
     var cast: [Cast] = []
     var downLoadTask: URLSessionDownloadTask?
     @IBOutlet weak var posterView: UIImageView!
@@ -19,13 +19,13 @@ class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if movie != nil {
+        if let movie = movie {
             fetchCredits(from: API.shared.endpoint + "\(movie.id)/credits")
-            updateUI()
+            updateUI(for: movie)
         }
     }
         
-    func updateUI() {
+    func updateUI(for movie: Movie) {
         if let posterUrl = URL(string: "\(movie.posterUrl!)") {
             downLoadTask = posterView.loadImage(imageUrl: posterUrl)
         }
