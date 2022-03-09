@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB03619D27D8A4E1005D42BA /* PCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB03619C27D8A4E1005D42BA /* PCoordinator.swift */; };
-		AB03619F27D8A51C005D42BA /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB03619E27D8A51C005D42BA /* AppCoordinator.swift */; };
+		AB03619F27D8A51C005D42BA /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB03619E27D8A51C005D42BA /* ApplicationCoordinator.swift */; };
 		AB0361A127D8ABEA005D42BA /* MoviesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0361A027D8ABEA005D42BA /* MoviesCoordinator.swift */; };
 		AB0361A327D8B671005D42BA /* MovieDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB0361A227D8B671005D42BA /* MovieDetailViewController.xib */; };
 		AB0361A527D8C9E0005D42BA /* MovieDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB0361A427D8C9E0005D42BA /* MovieDetailCoordinator.swift */; };
@@ -31,7 +31,7 @@
 
 /* Begin PBXFileReference section */
 		AB03619C27D8A4E1005D42BA /* PCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PCoordinator.swift; sourceTree = "<group>"; };
-		AB03619E27D8A51C005D42BA /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		AB03619E27D8A51C005D42BA /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		AB0361A027D8ABEA005D42BA /* MoviesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCoordinator.swift; sourceTree = "<group>"; };
 		AB0361A227D8B671005D42BA /* MovieDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieDetailViewController.xib; sourceTree = "<group>"; };
 		AB0361A427D8C9E0005D42BA /* MovieDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailCoordinator.swift; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				AB03619C27D8A4E1005D42BA /* PCoordinator.swift */,
-				AB03619E27D8A51C005D42BA /* AppCoordinator.swift */,
+				AB03619E27D8A51C005D42BA /* ApplicationCoordinator.swift */,
 				AB0361A027D8ABEA005D42BA /* MoviesCoordinator.swift */,
 				AB0361A427D8C9E0005D42BA /* MovieDetailCoordinator.swift */,
 			);
@@ -234,7 +234,7 @@
 				ABFE23C127BCD0E6001F46A2 /* APIshared.swift in Sources */,
 				ABFE23BB27BBBFA7001F46A2 /* UIImageView+loadImage.swift in Sources */,
 				ABF9D26227B51BA8009EC92C /* AppDelegate.swift in Sources */,
-				AB03619F27D8A51C005D42BA /* AppCoordinator.swift in Sources */,
+				AB03619F27D8A51C005D42BA /* ApplicationCoordinator.swift in Sources */,
 				ABFE23AD27BA412E001F46A2 /* Genre.swift in Sources */,
 				AB03619D27D8A4E1005D42BA /* PCoordinator.swift in Sources */,
 			);
